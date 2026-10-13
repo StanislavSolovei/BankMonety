@@ -8,6 +8,7 @@ namespace KontoNaMonety
     internal class KontoBankowe
     {
         private decimal _saldo;
+        private int _ilosc = 0;
         private string _wlasciel;
 
         public decimal Saldo
@@ -54,27 +55,33 @@ namespace KontoNaMonety
             {
                 if(kwota == 5)
                 {
+                    _ilosc += 1;
                     _saldo += kwota;
-                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN.");
+                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN. Wrzucono {_ilosc} monet");
                 } else if (kwota == 2)
                 {
+                    _ilosc += 1;
                     _saldo += kwota;
-                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN.");
+                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN. Wrzucono {_ilosc} monet");
                 } else if (kwota == 1)
                 {
+                    _ilosc += 1;
                     _saldo += kwota;
-                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN.");
+                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN. Wrzucono {_ilosc} monet");
                 } else if (kwota == 0.50m) {
+                    _ilosc += 1;
                     _saldo += kwota;
-                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN.");
+                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN. Wrzucono {_ilosc} monet");
                 } else if (kwota == 0.20m)
                 {
+                    _ilosc += 1;
                     _saldo += kwota;
-                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN.");
+                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN. Wrzucono {_ilosc} monet");
                 } else if (kwota == 0.10m)
                 {
+                    _ilosc += 1;
                     _saldo += kwota;
-                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN.");
+                    Console.WriteLine($"Wpłacono {kwota} PLN. Aktualny stan konta: {_saldo} PLN. Wrzucono {_ilosc} monet");
                 } else
                 {
                     Console.WriteLine("Błąd! Można wplacić tylko monety!");
