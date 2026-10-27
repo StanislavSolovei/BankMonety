@@ -10,6 +10,7 @@ namespace KontoNaMonety
         private decimal _saldo;
         private int _ilosc = 0;
         private string _wlasciel;
+        private string _nrKonta;
 
         public decimal Saldo
         {
@@ -44,7 +45,30 @@ namespace KontoNaMonety
             {
                  _saldo = startoweSaldo;
             }
+
+            Random rand = new Random();
+
+            _nrKonta = GeneratorLiczb(10);
+
+            Console.WriteLine($"Utworzono konto dla: {_wlasciel} z saldem: {_saldo} PLN i numerem konta: {_nrKonta}");
         }
+
+        private string GeneratorLiczb(int dlugosc)
+        {
+            Random rand = new Random();
+
+            string numer = "";
+
+            for(int i = 0; i < dlugosc; i++)
+            {
+                int num = rand.Next(0, 11);
+
+                numer += num;
+            }
+
+            return numer;
+        }
+
         public void Wplata(decimal kwota)
         {
             if (kwota < 0)

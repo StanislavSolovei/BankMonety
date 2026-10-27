@@ -1,4 +1,6 @@
-﻿namespace KontoNaMonety
+﻿using System.Globalization;
+
+namespace KontoNaMonety
 {
     internal class Program
     {
@@ -18,13 +20,23 @@
 
                 int operacja = int.Parse(Console.ReadLine());
 
+                if(operacja != 1)
+                {
+                    Console.WriteLine("Nie istnieje takiej operacji!");
+                }
+
                 switch (operacja)
                 {
                     case 1:
                         {
+
                             Console.WriteLine("Wprowadz kwote do wplacenia: ");
 
-                            decimal kwota = decimal.Parse(Console.ReadLine());
+                            string moneta = Console.ReadLine();
+
+                            moneta = moneta.Replace(",", ".");
+
+                            decimal.TryParse(moneta, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal kwota);
 
                             pusteKonto.Wplata(kwota);
 
