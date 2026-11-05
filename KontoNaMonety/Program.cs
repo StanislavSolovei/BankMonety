@@ -16,11 +16,11 @@ namespace KontoNaMonety
 
             while (true)
             {
-                Console.WriteLine("Wybierz operacje, 1 - Wplata");
+                Console.WriteLine("Wybierz operacje: 1 - Wplata || 2 - Wyświetl informacje");
 
                 int operacja = int.Parse(Console.ReadLine());
 
-                if(operacja != 1)
+                if(operacja != 1 && operacja != 2)
                 {
                     Console.WriteLine("Nie istnieje takiej operacji!");
                 }
@@ -39,6 +39,12 @@ namespace KontoNaMonety
                             decimal.TryParse(moneta, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal kwota);
 
                             pusteKonto.Wplata(kwota);
+
+                            break;
+                        }
+                    case 2:
+                        {
+                            pusteKonto.WyswietliInformacje();
 
                             break;
                         }
