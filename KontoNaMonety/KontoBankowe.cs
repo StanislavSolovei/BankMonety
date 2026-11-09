@@ -8,13 +8,18 @@ namespace KontoNaMonety
     internal class KontoBankowe
     {
         private decimal _saldo;
-        private int _ilosc = 0;
+        private int _iloscWrzuconych = 0;
+        private int _iloscZwroconych = 0;
         private string _wlasciel;
         private string _nrKonta;
+
+        List<Operacja> historia = new List<Operacja>();
 
         decimal[] nominaly = { 5m, 2m, 1m, 0.50m, 0.20m, 0.10m };
 
         int[] iloscMonet;
+
+        int[] maxMonet = { 2, 5, 10, 20, 50, 100 };
 
         public decimal Saldo
         {
@@ -77,41 +82,70 @@ namespace KontoNaMonety
 
         public void Wplata(decimal kwota)
         {
-            bool Znaleziono = false;
+            bool znaleziono = false;
 
             if (kwota < 0)
             {
                 Console.WriteLine("Kwota nie może być ujemna!");
+                return;
             }
             
             for (int i = 0; i < nominaly.Length; i++)
             {
                 if(kwota == nominaly[i])
                 {
-                    Znaleziono = true;
-
-                    if(Znaleziono == true)
+                    if (iloscMonet[i] < maxMonet[i]) 
                     {
+                        znaleziono = true;
                         _saldo += kwota;
-                        _ilosc++;
+                        _iloscWrzuconych++;
                         iloscMonet[i]++;
                         Console.WriteLine($"Wrzucono monetę o nominale: {kwota} PLN. Aktualne saldo: {_saldo} PLN");
+                        historia.Add(new Operacja { Kwota = kwota, Przyjeta = true });
+                    } else
+                    {
+                        _iloscZwroconych++;
+                        Console.WriteLine("Nie można wrzucić więcej monet o tym nominale!");
+                        historia.Add(new Operacja { Kwota = kwota, Przyjeta = false });
+                        return;
                     }
                 }
             }
-            if (Znaleziono == false)
+            if (znaleziono == false)
             {
+                _iloscZwroconych++;
                 Console.WriteLine($"Nie ma takiej monety!");
+                historia.Add(new Operacja { Kwota = kwota, Przyjeta = false });
             }
         }
         public void WyswietliInformacje()
         {
             Console.WriteLine($"Właścieciel: {_wlasciel}");
             Console.WriteLine($"Stan konta: {_saldo} PLN");
-            Console.WriteLine($"Wrzucono monet: {_ilosc}");
+            Console.WriteLine($"Wrzucono monet: {_iloscWrzuconych}");
+            Console.WriteLine($"Zwrócono monet: {_iloscZwroconych}");
             for (int i = 0; i < nominaly.Length; i++)
             {
                 Console.WriteLine($"Monet o nominale {nominaly[i]} PLN: {iloscMonet[i]}");
+            }
+        }
+        public void WyswietlHistorie()
+        {
+            if(historia.Count == 0)
+            {
+                Console.WriteLine("Historia jest pusta!");
+                return;
+            }
+            Console.WriteLine("Historia operacji:");
+            foreach(Operacja operacja in historia)
+            {
+                if(operacja.Przyjeta == true)
+                {
+                    Console.WriteLine($"{operacja.Kwota} PLN | PRZYJĘTO");
+                } else
+                {
+                    Console.WriteLine($"{operacja.Kwota} PLN | ODRZUCONO");
+                }
             }
         }
     }

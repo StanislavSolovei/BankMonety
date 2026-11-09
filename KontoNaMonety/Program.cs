@@ -16,11 +16,11 @@ namespace KontoNaMonety
 
             while (true)
             {
-                Console.WriteLine("Wybierz operacje: 1 - Wplata || 2 - Wyświetl informacje");
+                Console.WriteLine("Wybierz operacje: 1 - Wplata || 2 - Wyświetl informacje || 3 - Wyświetl historię");
 
                 int operacja = int.Parse(Console.ReadLine());
 
-                if(operacja != 1 && operacja != 2)
+                if(operacja != 1 && operacja != 2 && operacja != 3)
                 {
                     Console.WriteLine("Nie istnieje takiej operacji!");
                 }
@@ -45,6 +45,12 @@ namespace KontoNaMonety
                     case 2:
                         {
                             pusteKonto.WyswietliInformacje();
+
+                            break;
+                        }
+                    case 3:
+                        {
+                            pusteKonto.WyswietlHistorie();
 
                             break;
                         }
