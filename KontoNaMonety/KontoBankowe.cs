@@ -105,7 +105,7 @@ namespace KontoNaMonety
                     } else
                     {
                         _iloscZwroconych++;
-                        Console.WriteLine("Nie można wrzucić więcej monet o tym nominale!");
+                        Console.WriteLine($"Nie można wrzucić więcej monet o tym nominale: {nominaly[i]} PLN");
                         historia.Add(new Operacja { Kwota = kwota, Przyjeta = false });
                         return;
                     }
@@ -116,6 +116,23 @@ namespace KontoNaMonety
                 _iloscZwroconych++;
                 Console.WriteLine($"Nie ma takiej monety!");
                 historia.Add(new Operacja { Kwota = kwota, Przyjeta = false });
+            }
+        }
+        public void WplataWiele(string input)
+        {
+            string[] monety = input.Split(',');
+
+            foreach (string moneta in monety)
+            {
+                if (decimal.TryParse(moneta.Trim(), out decimal kwota))
+                {
+                    Wplata(kwota);
+                } else
+                {
+                    _iloscZwroconych++;
+                    Console.WriteLine("To nie jest liczba!");
+                    return;
+                }
             }
         }
         public void WyswietliInformacje()
